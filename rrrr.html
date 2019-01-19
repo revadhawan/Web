@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Github Search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+  <script>
+    $(document).ready(function() {
+      $('#searchUser').on('keyup', function(e){
+        let username = e.target.value;
+                $.get("http://147.83.7.204:8080/dsaApp/scoreboard/scoreboard", function (data, status) {
+                    $("tbody").html(` `);
+                    console.log(data);
+                    for (let i=0; i<data.length;i++){
+                        $("tbody").append(`
+                            <tr>
+                                <td>${data[i].username}</td>
+                                <td>${data[i].health}</td>
+                                <td>${data[i].damage}</td>
+                            </tr>
+                        `);
+                    }
+                });
+            });
+        });
+  </script>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="searchContainer">
+      <h1>Github Repo Search</h1>
+      <p class="lead">Enter a username to fetch their repos information</p>
+      <input type="text" id="searchUser" class="form-control" placeholder="Github Username...">
+    </div>
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Number of followers</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>
